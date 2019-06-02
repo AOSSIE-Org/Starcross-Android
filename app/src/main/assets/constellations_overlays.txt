@@ -1,0 +1,82 @@
+"Ursa Major" 100 100 75 0 0
+"Lynx" 90 90 -10 0 0
+"Leo" 80 80 85 0 0
+"Leo Minor" 60 60 100 0 0
+"Cancer" 60 60 110 0 0
+"Canis Major" 40 40 35 0 0
+"Capricornus" 55 55 -100 0 0
+"Cassiopeia" 50 50 -30 0 0
+"Centaurus" 80 80 110 0 0
+"Lupus" 50 50 120 0 0
+"Canis Minor" 25 25 -60 0 0
+"Antila" 35 35 30 0 0
+"Apus" 10 20 -140 0 0
+"Carina" 50 50 -30 0 0
+"Cepheus" 60 60 150 0 0
+"Cetus" 100 100 -90 20 0
+"Chamaeleon" 40 20 75 0 0
+"Hydrus" 40 40 180 -1 1
+"Lacerta" 15 30 -60 0.5 -1.5
+"Andromeda" 50 50 150 0 0
+"Aquarius" 70 70 -120 7 -5
+"Aquila" 32 65 -110 0 0
+"Ara" 30 30 20 0 0
+"Aries" 50 50 -120 -5 0
+"Coma Berenices" 40 40 -105 0 1
+"Corona Australis" 15 15 160 0 0
+"Corona Borealis" 15 15 60 0 0.5
+"Corvus" 30 30 90 0 0
+"Crater" 30 30 90 -1 0
+"Crux" 15 15 120 0 0
+"Auriga" 90 90 180 0 0
+"Bootes" 80 80 80 0 10
+"Caelum" 15 15 180 0 0
+"Camelopardalis" 50 50 -150 0 0
+"Canes Venatici" 15 15 90 0 0
+"Circinus" 10 20 15 0 0
+"Columba" 25 25 10 0 -1
+"Cygnus" 50 50 -45 0 0
+"Delphinus" 30 30 -75 -0.5 -2
+"Dorado" 20 40 -55 0 2
+"Draco" 80 80 -150 -8 0
+"Equuleus" 20 20 90 1 1
+"Eridanus" 120 120 -55 0 -10
+"Fornax" 15 15 -110 0 0
+"Gemini" 70 70 200 -3 0
+"Grus" 40 40 -145 -1.5 1.5
+"Hercules" 80 80 -150 1 8
+"Hydra" 200 100 90 -110 -15
+"Horologium" 20 40 -175 0 -3
+"Indus" 20 40 -140 -1 -3
+"Lepus" 35 35 -25 -1.5 -0.5
+"Libra" 35 35 -35 0 2
+"Lyra" 20 20 -55 0 0
+"Mensa" 35 35 -145 0.5 -2.5
+"Musca" 20 20 80 0.5 0
+"Norma" 20 20 0 0.4 0.5
+"Octans" 30 30 -100 1 0
+"Orion" 65 65 -120 0 0
+"Pavo" 50 50 0 4 3
+"Pegasus" 110 110 90 20 -5
+"Perseus" 80 80 -165 0 0
+"Phoenix" 40 40 -145 0 0
+"Pictor" 30 30 -10 0 0
+"Pisces" 100 100 -150 0 -10
+"Piscis Austrinus" 35 35 -95 0 0
+"Pyxis" 25 25 -135 0 0
+"Reticulum" 15 15 -5 0 0
+"Sagittarius" 80 80 -175 -7 -10
+"Sagitta" 15 15 -58 0 0.1
+"Scorpius" 70 70 50 -11 8.5
+"Sculptor" 40 40 -5 1 3
+"Scutum" 25 25 40 0 0.4
+"Sextans" 12 12 55 0 -0.1
+"Taurus" 75 75 -85 5 -3
+"Telescopium" 15 15 -75 0 -0.6
+"Triangulum" 15 15 -10 0.2 0.3
+"Tucana" 40 40 -80 -1 -2
+"Monoceros" 80 80 80 -10 -2
+"Ursa Minor" 50 50 -25 2 -2
+"Virgo" 90 90 40 -3 4
+"Volans" 25 25 -90 0 0
+"Vulpecula" 30 15 -65 -1 0
