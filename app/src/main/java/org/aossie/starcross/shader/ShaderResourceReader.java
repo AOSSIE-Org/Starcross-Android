@@ -1,4 +1,4 @@
-package org.aossie.starcross.util;
+package org.aossie.starcross.shader;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -9,7 +9,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class ShaderResourceReader {
-
     public static String readTextFileFromResource(Context context, int resourceId) {
         StringBuilder body = new StringBuilder();
         try {
@@ -28,5 +27,4 @@ public class ShaderResourceReader {
         }
         return body.toString();
     }
-
 }

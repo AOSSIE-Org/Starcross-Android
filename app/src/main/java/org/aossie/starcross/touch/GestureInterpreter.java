@@ -6,11 +6,17 @@ import android.view.MotionEvent;
 
 import org.aossie.starcross.util.MiscUtil;
 
-public class GestureInterpreter extends GestureDetector.SimpleOnGestureListener {// TODO
+public class GestureInterpreter extends GestureDetector.SimpleOnGestureListener {
     private static final String TAG = MiscUtil.getTag(GestureInterpreter.class);
+    private MapMover mapMover;
+
+    public GestureInterpreter(MapMover mapMover) {
+        this.mapMover = mapMover;
+    }
 
     private final Flinger flinger = new Flinger(new Flinger.FlingListener() {
         public void fling(float distanceX, float distanceY) {
+            mapMover.onDrag(distanceX, distanceY);
         }
     });
 
@@ -26,23 +32,5 @@ public class GestureInterpreter extends GestureDetector.SimpleOnGestureListener 
         Log.d(TAG, "Flinging " + velocityX + ", " + velocityY);
         flinger.fling(velocityX, velocityY);
         return true;
-    }
-
-    @Override
-    public boolean onSingleTapUp(MotionEvent e) {
-        Log.d(TAG, "Tap up");
-        return true;
-    }
-
-    @Override
-    public boolean onDoubleTap(MotionEvent e) {
-        Log.d(TAG, "Double tap");
-        return false;
-    }
-
-    @Override
-    public boolean onSingleTapConfirmed(MotionEvent e) {
-        Log.d(TAG, "Confirmed single tap");
-        return false;
     }
 }

@@ -9,7 +9,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-public class Flinger {
+class Flinger {
     private static final String TAG = MiscUtil.getTag(Flinger.class);
 
     public interface FlingListener {
@@ -22,19 +22,19 @@ public class Flinger {
     private ScheduledExecutorService executor;
     private ScheduledFuture<?> flingTask;
 
-    public Flinger(FlingListener listener) {
+    Flinger(FlingListener listener) {
         this.listener = listener;
         executor = Executors.newScheduledThreadPool(1);
     }
 
-    public void fling(float velocityX, float velocityY) {
+    void fling(float velocityX, float velocityY) {
         Log.d(TAG, "Doing the fling");
         class PositionUpdater implements Runnable {
             private float myVelocityX, myVelocityY;
             private float decelFactor = 1.1f;
             private float TOL = 10;
 
-            public PositionUpdater(float velocityX, float velocityY) {
+            private PositionUpdater(float velocityX, float velocityY) {
                 this.myVelocityX = velocityX;
                 this.myVelocityY = velocityY;
             }
@@ -53,7 +53,7 @@ public class Flinger {
                 0, timeIntervalMillis, TimeUnit.MILLISECONDS);
     }
 
-    public void stop() {
+    void stop() {
         if (flingTask != null) flingTask.cancel(true);
         Log.d(TAG, "Fling stopped");
     }

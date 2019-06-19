@@ -9,20 +9,8 @@ public class MathUtil {
     public static final float DEGREES_TO_RADIANS = PI / 180;
     public static final float RADIANS_TO_DEGREES = 180 / PI;
 
-    public static float abs(float x) {
-        return Math.abs(x);
-    }
-
     public static float sqrt(float x) {
         return (float) Math.sqrt(x);
-    }
-
-    public static float floor(float x) {
-        return (float) Math.floor(x);
-    }
-
-    public static float ceil(float x) {
-        return (float) Math.ceil(x);
     }
 
     public static float sin(float x) {
@@ -45,29 +33,7 @@ public class MathUtil {
         return (float) Math.acos(x);
     }
 
-    public static float atan(float x) {
-        return (float) Math.atan(x);
-    }
-
     public static float atan2(float y, float x) {
         return (float) Math.atan2(y, x);
     }
-
-    public static float log10(float x) {
-        return (float) Math.log10(x);
-    }
-
-    public static float quickModulo(float x, float y) {
-        if (x > y) return x - y;
-        return x;
-    }
-
-    public static float random(float f) {
-        return ((float) Math.random()) * f;
-    }
-
-    public static float pow(float x, float exponent) {
-        return (float) Math.pow(x, exponent);
-    }
-
 }

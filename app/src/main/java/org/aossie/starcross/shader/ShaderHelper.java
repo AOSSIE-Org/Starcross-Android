@@ -1,6 +1,8 @@
-package org.aossie.starcross.util;
+package org.aossie.starcross.shader;
 
 import android.util.Log;
+
+import org.aossie.starcross.util.MiscUtil;
 
 import static android.opengl.GLES20.GL_COMPILE_STATUS;
 import static android.opengl.GLES20.GL_FRAGMENT_SHADER;
@@ -22,7 +24,6 @@ import static android.opengl.GLES20.glShaderSource;
 import static android.opengl.GLES20.glValidateProgram;
 
 public class ShaderHelper {
-
     private static final String TAG = MiscUtil.getTag(ShaderHelper.class);
 
     public static int compileVertexShader(String shaderCode) {
@@ -87,5 +88,4 @@ public class ShaderHelper {
 
         return validateStatus[0] != 0;
     }
-
 }

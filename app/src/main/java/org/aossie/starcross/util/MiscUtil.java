@@ -1,7 +1,6 @@
 package org.aossie.starcross.util;
 
 public class MiscUtil {
-
     private MiscUtil() {
     }
 
@@ -11,5 +10,4 @@ public class MiscUtil {
         }
         return "Starcross." + o.getClass().getSimpleName();
     }
-
 }

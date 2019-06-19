@@ -1,12 +1,18 @@
 package org.aossie.starcross.touch;
 
-import android.util.Log;
 import android.view.MotionEvent;
 
 import org.aossie.starcross.util.MathUtil;
-import org.aossie.starcross.util.MiscUtil;
 
-public class DragRotateZoomGestureDetector {
+public class GestureDetector {
+    private enum State {READY, DRAGGING, DRAGGING2}
+
+    private float last1X;
+    private float last1Y;
+    private float last2X;
+    private float last2Y;
+    private State currentState = State.READY;
+    private DragRotateZoomGestureDetectorListener listener;
 
     public interface DragRotateZoomGestureDetectorListener {
         void onDrag(float xPixels, float yPixels);
@@ -16,24 +22,9 @@ public class DragRotateZoomGestureDetector {
         void onRotate(float radians);
     }
 
-    private static final String TAG = MiscUtil.getTag(DragRotateZoomGestureDetector.class);
-
-    private DragRotateZoomGestureDetectorListener listener;
-    ;
-
-    public DragRotateZoomGestureDetector(DragRotateZoomGestureDetectorListener listener) {
+    public GestureDetector(DragRotateZoomGestureDetectorListener listener) {
         this.listener = listener;
     }
-
-    private enum State {READY, DRAGGING, DRAGGING2}
-
-    private State currentState = State.READY;
-    private float last1X;
-    private float last1Y;
-
-    private float last2X;
-    private float last2Y;
-
 
     public boolean onTouchEvent(MotionEvent ev) {
         int actionCode = ev.getAction() & MotionEvent.ACTION_MASK;
@@ -56,7 +47,6 @@ public class DragRotateZoomGestureDetector {
         if (actionCode == MotionEvent.ACTION_MOVE && currentState == State.DRAGGING2) {
             int pointerCount = ev.getPointerCount();
             if (pointerCount != 2) {
-                Log.w(TAG, "Expected exactly two pointers but got " + pointerCount);
                 return false;
             }
             float current1X = ev.getX(0);
@@ -100,7 +90,6 @@ public class DragRotateZoomGestureDetector {
         if (actionCode == MotionEvent.ACTION_POINTER_DOWN && currentState == State.DRAGGING) {
             int pointerCount = ev.getPointerCount();
             if (pointerCount != 2) {
-                Log.w(TAG, "Expected exactly two pointers but got " + pointerCount);
                 return false;
             }
             currentState = State.DRAGGING2;
