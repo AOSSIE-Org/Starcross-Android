@@ -2,7 +2,7 @@ package org.aossie.starcross.layer;
 
 import android.content.res.Resources;
 
-import org.aossie.starcross.source.AstronomicalSource;
+import org.aossie.starcross.source.data.AstronomicalSource;
 
 import java.util.ArrayList;
 

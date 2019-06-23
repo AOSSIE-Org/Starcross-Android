@@ -5,7 +5,7 @@ import android.content.res.Resources;
 import android.util.Log;
 
 import org.aossie.starcross.renderer.RendererObjectManager;
-import org.aossie.starcross.source.AstronomicalSource;
+import org.aossie.starcross.source.data.AstronomicalSource;
 import org.aossie.starcross.source.proto.ProtobufAstronomicalSource;
 import org.aossie.starcross.source.proto.SourceReader;
 import org.aossie.starcross.util.MiscUtil;

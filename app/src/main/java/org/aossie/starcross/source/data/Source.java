@@ -1,7 +1,7 @@
-package org.aossie.starcross.source;
+package org.aossie.starcross.source.data;
 
 import java.util.List;
 
-public interface Sources {
+public interface Source {
     List<? extends PointSource> getPoints();
 }

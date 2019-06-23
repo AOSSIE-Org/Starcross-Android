@@ -8,7 +8,7 @@ import org.aossie.starcross.renderer.util.TexCoordBuffer;
 import org.aossie.starcross.renderer.util.TextureManager;
 import org.aossie.starcross.renderer.util.TextureReference;
 import org.aossie.starcross.renderer.util.VertexBuffer;
-import org.aossie.starcross.source.PointSource;
+import org.aossie.starcross.source.data.PointSource;
 import org.aossie.starcross.util.Vector3;
 import org.aossie.starcross.util.MathUtil;
 import org.aossie.starcross.util.VectorUtil;

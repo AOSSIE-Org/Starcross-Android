@@ -1,4 +1,4 @@
-package org.aossie.starcross.source;
+package org.aossie.starcross.source.data;
 
 import org.aossie.starcross.util.GeocentricCoordinates;
 

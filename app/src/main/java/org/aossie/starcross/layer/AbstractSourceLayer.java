@@ -4,9 +4,9 @@ import android.content.res.Resources;
 
 import org.aossie.starcross.renderer.RendererObjectManager;
 import org.aossie.starcross.renderer.util.AbstractUpdateClosure;
-import org.aossie.starcross.source.AstronomicalSource;
-import org.aossie.starcross.source.PointSource;
-import org.aossie.starcross.source.Sources;
+import org.aossie.starcross.source.data.AstronomicalSource;
+import org.aossie.starcross.source.data.PointSource;
+import org.aossie.starcross.source.data.Source;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -29,7 +29,7 @@ public abstract class AbstractSourceLayer extends AbstractLayer {
         astroSources.clear();
         initializeAstroSources(astroSources);
         for (AstronomicalSource astroSource : astroSources) {
-            Sources sources = astroSource.initialize();
+            Source sources = astroSource.initialize();
             pointSources.addAll(sources.getPoints());
         }
         updateLayerForControllerChange();

@@ -1,7 +1,7 @@
 package org.aossie.starcross.source.proto;
 
 import org.aossie.starcross.source.AbstractAstronomicalSource;
-import org.aossie.starcross.source.PointSource;
+import org.aossie.starcross.source.data.PointSource;
 import org.aossie.starcross.source.impl.PointSourceImpl;
 import org.aossie.starcross.util.GeocentricCoordinates;
 
