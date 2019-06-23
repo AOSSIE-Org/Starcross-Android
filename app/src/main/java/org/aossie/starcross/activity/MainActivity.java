@@ -10,6 +10,7 @@ import org.aossie.starcross.R;
 import org.aossie.starcross.control.AstronomerModel;
 import org.aossie.starcross.control.AstronomerModelImpl;
 import org.aossie.starcross.control.ControllerGroup;
+import org.aossie.starcross.layer.ConstellationsLayer;
 import org.aossie.starcross.layer.LayerManager;
 import org.aossie.starcross.layer.StarsLayer;
 import org.aossie.starcross.renderer.RendererController;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         LayerManager layerManager = new LayerManager();
         layerManager.addLayer(new StarsLayer(getAssets(), getResources()));
+//        layerManager.addLayer(new ConstellationsLayer(getAssets(), getResources())); // TODO render constellations
         layerManager.initialize();
         layerManager.registerWithRenderer(rendererController);
 
