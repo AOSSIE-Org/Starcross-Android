@@ -1,6 +1,6 @@
 package org.aossie.starcross.source.impl;
 
-import org.aossie.starcross.source.PointSource;
+import org.aossie.starcross.source.data.PointSource;
 import org.aossie.starcross.util.GeocentricCoordinates;
 
 public class PointSourceImpl extends AbstractSource implements PointSource {

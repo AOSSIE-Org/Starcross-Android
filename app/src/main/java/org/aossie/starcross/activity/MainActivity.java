@@ -10,7 +10,9 @@ import org.aossie.starcross.R;
 import org.aossie.starcross.control.AstronomerModel;
 import org.aossie.starcross.control.AstronomerModelImpl;
 import org.aossie.starcross.control.ControllerGroup;
+import org.aossie.starcross.layer.ConstellationsLayer;
 import org.aossie.starcross.layer.LayerManager;
+import org.aossie.starcross.layer.PlanetsLayer;
 import org.aossie.starcross.layer.StarsLayer;
 import org.aossie.starcross.renderer.RendererController;
 import org.aossie.starcross.renderer.RendererModelUpdateClosure;
@@ -51,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
 
         LayerManager layerManager = new LayerManager();
         layerManager.addLayer(new StarsLayer(getAssets(), getResources()));
+        // TODO filter works with adding or removing layer From layer manager
+//        layerManager.addLayer(new ConstellationsLayer(getAssets(), getResources())); // TODO add constellations to surfaceview
+//        layerManager.addLayer(new PlanetsLayer(getResources())); // TODO add planets to surfaceview
         layerManager.initialize();
         layerManager.registerWithRenderer(rendererController);
 

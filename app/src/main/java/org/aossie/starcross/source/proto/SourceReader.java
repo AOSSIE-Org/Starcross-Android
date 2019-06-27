@@ -1,10 +1,18 @@
 package org.aossie.starcross.source.proto;
 
+import com.google.protobuf.CodedInputStream;
+import com.google.protobuf.CodedOutputStream;
+import com.google.protobuf.ExtensionRegistryLite;
+import com.google.protobuf.GeneratedMessageLite;
+
+import java.io.IOException;
+import java.util.Collections;
+
 public final class SourceReader {
     private SourceReader() {
     }
 
-    public static final class GeocentricCoordinatesProto extends com.google.protobuf.GeneratedMessageLite {
+    public static final class GeocentricCoordinatesProto extends GeneratedMessageLite {
 
         private GeocentricCoordinatesProto() {
             initFields();
@@ -52,7 +60,7 @@ public final class SourceReader {
             return true;
         }
 
-        public void writeTo(com.google.protobuf.CodedOutputStream output) throws java.io.IOException {
+        public void writeTo(CodedOutputStream output) throws IOException {
             getSerializedSize();
             if (hasRightAscension()) {
                 output.writeFloat(1, getRightAscension());
@@ -70,10 +78,10 @@ public final class SourceReader {
 
             size = 0;
             if (hasRightAscension()) {
-                size += com.google.protobuf.CodedOutputStream.computeFloatSize(1, getRightAscension());
+                size += CodedOutputStream.computeFloatSize(1, getRightAscension());
             }
             if (hasDeclination()) {
-                size += com.google.protobuf.CodedOutputStream.computeFloatSize(2, getDeclination());
+                size += CodedOutputStream.computeFloatSize(2, getDeclination());
             }
             memoizedSerializedSize = size;
             return size;
@@ -96,7 +104,7 @@ public final class SourceReader {
         }
 
         public static final class Builder extends
-                com.google.protobuf.GeneratedMessageLite.Builder<SourceReader.GeocentricCoordinatesProto, Builder> {
+                GeneratedMessageLite.Builder<SourceReader.GeocentricCoordinatesProto, Builder> {
             private SourceReader.GeocentricCoordinatesProto result;
 
             private Builder() {
@@ -160,8 +168,8 @@ public final class SourceReader {
                 return this;
             }
 
-            public Builder mergeFrom(com.google.protobuf.CodedInputStream input,
-                                     com.google.protobuf.ExtensionRegistryLite extensionRegistry) throws java.io.IOException {
+            public Builder mergeFrom(CodedInputStream input,
+                                     ExtensionRegistryLite extensionRegistry) throws IOException {
                 while (true) {
                     int tag = input.readTag();
                     switch (tag) {
@@ -202,7 +210,7 @@ public final class SourceReader {
         }
     }
 
-    public static final class PointElementProto extends com.google.protobuf.GeneratedMessageLite {
+    public static final class PointElementProto extends GeneratedMessageLite {
         private PointElementProto() {
             initFields();
         }
@@ -250,7 +258,7 @@ public final class SourceReader {
             return true;
         }
 
-        public void writeTo(com.google.protobuf.CodedOutputStream output)
+        public void writeTo(CodedOutputStream output)
                 throws java.io.IOException {
             getSerializedSize();
             if (hasLocation()) {
@@ -269,11 +277,11 @@ public final class SourceReader {
 
             size = 0;
             if (hasLocation()) {
-                size += com.google.protobuf.CodedOutputStream
+                size += CodedOutputStream
                         .computeMessageSize(1, getLocation());
             }
             if (hasSize()) {
-                size += com.google.protobuf.CodedOutputStream
+                size += CodedOutputStream
                         .computeInt32Size(3, getSize());
             }
             memoizedSerializedSize = size;
@@ -297,7 +305,7 @@ public final class SourceReader {
         }
 
         public static final class Builder extends
-                com.google.protobuf.GeneratedMessageLite.Builder<SourceReader.PointElementProto, Builder> {
+                GeneratedMessageLite.Builder<SourceReader.PointElementProto, Builder> {
             private SourceReader.PointElementProto result;
 
             private Builder() {
@@ -361,8 +369,8 @@ public final class SourceReader {
                 return this;
             }
 
-            public Builder mergeFrom(com.google.protobuf.CodedInputStream input,
-                                     com.google.protobuf.ExtensionRegistryLite extensionRegistry) throws java.io.IOException {
+            public Builder mergeFrom(CodedInputStream input,
+                                     ExtensionRegistryLite extensionRegistry) throws IOException {
                 while (true) {
                     int tag = input.readTag();
                     switch (tag) {
@@ -429,7 +437,7 @@ public final class SourceReader {
         }
     }
 
-    public static final class AstronomicalSourceProto extends com.google.protobuf.GeneratedMessageLite {
+    public static final class AstronomicalSourceProto extends GeneratedMessageLite {
 
         private AstronomicalSourceProto() {
             initFields();
@@ -506,8 +514,8 @@ public final class SourceReader {
             return true;
         }
 
-        public void writeTo(com.google.protobuf.CodedOutputStream output)
-                throws java.io.IOException {
+        public void writeTo(CodedOutputStream output)
+                throws IOException {
             getSerializedSize();
             for (int element : getNameIdsList()) {
                 output.writeUInt32(1, element);
@@ -537,26 +545,26 @@ public final class SourceReader {
             {
                 int dataSize = 0;
                 for (int element : getNameIdsList()) {
-                    dataSize += com.google.protobuf.CodedOutputStream
+                    dataSize += CodedOutputStream
                             .computeUInt32SizeNoTag(element);
                 }
                 size += dataSize;
                 size += getNameIdsList().size();
             }
             if (hasSearchLocation()) {
-                size += com.google.protobuf.CodedOutputStream
+                size += CodedOutputStream
                         .computeMessageSize(2, getSearchLocation());
             }
             if (hasSearchLevel()) {
-                size += com.google.protobuf.CodedOutputStream
+                size += CodedOutputStream
                         .computeFloatSize(3, getSearchLevel());
             }
             if (hasLevel()) {
-                size += com.google.protobuf.CodedOutputStream
+                size += CodedOutputStream
                         .computeFloatSize(4, getLevel());
             }
             for (SourceReader.PointElementProto element : getPointList()) {
-                size += com.google.protobuf.CodedOutputStream
+                size += CodedOutputStream
                         .computeMessageSize(5, element);
             }
 
@@ -580,8 +588,7 @@ public final class SourceReader {
             return newBuilder(this);
         }
 
-        public static final class Builder extends
-                com.google.protobuf.GeneratedMessageLite.Builder<
+        public static final class Builder extends GeneratedMessageLite.Builder<
                         SourceReader.AstronomicalSourceProto, Builder> {
             private SourceReader.AstronomicalSourceProto result;
 
@@ -629,11 +636,11 @@ public final class SourceReader {
                 if (result == null) {
                     throw new IllegalStateException("build() has already been called on this Builder.");
                 }
-                if (result.nameIds_ != java.util.Collections.EMPTY_LIST) {
-                    result.nameIds_ = java.util.Collections.unmodifiableList(result.nameIds_);
+                if (result.nameIds_ != Collections.EMPTY_LIST) {
+                    result.nameIds_ = Collections.unmodifiableList(result.nameIds_);
                 }
-                if (result.point_ != java.util.Collections.EMPTY_LIST) {
-                    result.point_ = java.util.Collections.unmodifiableList(result.point_);
+                if (result.point_ != Collections.EMPTY_LIST) {
+                    result.point_ = Collections.unmodifiableList(result.point_);
                 }
                 SourceReader.AstronomicalSourceProto returnMe = result;
                 result = null;
@@ -667,8 +674,8 @@ public final class SourceReader {
                 return this;
             }
 
-            public Builder mergeFrom(com.google.protobuf.CodedInputStream input,
-                                     com.google.protobuf.ExtensionRegistryLite extensionRegistry) throws java.io.IOException {
+            public Builder mergeFrom(CodedInputStream input,
+                                     ExtensionRegistryLite extensionRegistry) throws IOException {
                 while (true) {
                     int tag = input.readTag();
                     switch (tag) {
@@ -782,8 +789,7 @@ public final class SourceReader {
 
     }
 
-    public static final class AstronomicalSourcesProto extends
-            com.google.protobuf.GeneratedMessageLite {
+    public static final class AstronomicalSourcesProto extends GeneratedMessageLite {
 
         private AstronomicalSourcesProto() {
             initFields();
@@ -815,8 +821,7 @@ public final class SourceReader {
             return true;
         }
 
-        public void writeTo(com.google.protobuf.CodedOutputStream output)
-                throws java.io.IOException {
+        public void writeTo(CodedOutputStream output) throws IOException {
             getSerializedSize();
             for (SourceReader.AstronomicalSourceProto element : getSourceList()) {
                 output.writeMessage(1, element);
@@ -831,8 +836,7 @@ public final class SourceReader {
 
             size = 0;
             for (SourceReader.AstronomicalSourceProto element : getSourceList()) {
-                size += com.google.protobuf.CodedOutputStream
-                        .computeMessageSize(1, element);
+                size += CodedOutputStream.computeMessageSize(1, element);
             }
             memoizedSerializedSize = size;
             return size;
@@ -854,7 +858,7 @@ public final class SourceReader {
             return newBuilder(this);
         }
 
-        public static final class Builder extends com.google.protobuf.GeneratedMessageLite.Builder<SourceReader.AstronomicalSourcesProto, Builder> {
+        public static final class Builder extends GeneratedMessageLite.Builder<SourceReader.AstronomicalSourcesProto, Builder> {
             private SourceReader.AstronomicalSourcesProto result;
 
             private Builder() {
@@ -901,8 +905,8 @@ public final class SourceReader {
                 if (result == null) {
                     throw new IllegalStateException("build() has already been called on this Builder.");
                 }
-                if (result.source_ != java.util.Collections.EMPTY_LIST) {
-                    result.source_ = java.util.Collections.unmodifiableList(result.source_);
+                if (result.source_ != Collections.EMPTY_LIST) {
+                    result.source_ = Collections.unmodifiableList(result.source_);
                 }
                 SourceReader.AstronomicalSourcesProto returnMe = result;
                 result = null;
@@ -921,10 +925,8 @@ public final class SourceReader {
                 return this;
             }
 
-            public Builder mergeFrom(
-                    com.google.protobuf.CodedInputStream input,
-                    com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-                    throws java.io.IOException {
+            public Builder mergeFrom(CodedInputStream input, ExtensionRegistryLite extensionRegistry)
+                    throws IOException {
                 while (true) {
                     int tag = input.readTag();
                     switch (tag) {

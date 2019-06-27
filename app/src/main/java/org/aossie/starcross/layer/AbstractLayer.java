@@ -7,7 +7,7 @@ import org.aossie.starcross.renderer.RendererController;
 import org.aossie.starcross.renderer.RendererControllerBase;
 import org.aossie.starcross.renderer.RendererObjectManager;
 import org.aossie.starcross.renderer.util.UpdateClosure;
-import org.aossie.starcross.source.PointSource;
+import org.aossie.starcross.source.data.PointSource;
 import org.aossie.starcross.util.MiscUtil;
 
 import java.util.ArrayList;

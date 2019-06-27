@@ -2,7 +2,7 @@ package org.aossie.starcross.renderer;
 
 import org.aossie.starcross.renderer.util.UpdateClosure;
 
-import org.aossie.starcross.source.PointSource;
+import org.aossie.starcross.source.data.PointSource;
 
 import java.util.EnumSet;
 import java.util.List;
