@@ -52,4 +52,33 @@ public class Geometry {
                 xym - zs, y * ym + cosD, yzm + xs,
                 zxm + ys, yzm - xs, z * zm + cosD);
     }
+
+    public static float mod2pi(float x) {
+        float factor = x / MathUtil.TWO_PI;
+        float result = MathUtil.TWO_PI * (factor - abs_floor(factor));
+        if (result < 0.0) {
+            result = MathUtil.TWO_PI + result;
+        }
+        return result;
+    }
+
+    private static float abs_floor(float x) {
+        float result;
+        if (x >= 0.0)
+            result = MathUtil.floor(x);
+        else
+            result = MathUtil.ceil(x);
+        return result;
+    }
+
+    public static float cosineSimilarity(Vector3 v1, Vector3 v2) {
+        // We might want to optimize this implementation at some point.
+        return scalarProduct(v1, v2)
+                / MathUtil.sqrt(scalarProduct(v1, v1)
+                * scalarProduct(v2, v2));
+    }
+
+    private static float scalarProduct(Vector3 v1, Vector3 v2) {
+        return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
+    }
 }

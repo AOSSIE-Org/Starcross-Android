@@ -33,7 +33,23 @@ public class MathUtil {
         return (float) Math.acos(x);
     }
 
+    public static float atan(float x) {
+        return (float) Math.atan(x);
+    }
+
     public static float atan2(float y, float x) {
         return (float) Math.atan2(y, x);
+    }
+
+    public static float abs(float x) {
+        return Math.abs(x);
+    }
+
+    static float floor(float x) {
+        return (float) Math.floor(x);
+    }
+
+    static float ceil(float x) {
+        return (float) Math.ceil(x);
     }
 }
