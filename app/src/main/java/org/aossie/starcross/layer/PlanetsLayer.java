@@ -3,8 +3,8 @@ package org.aossie.starcross.layer;
 import android.content.res.Resources;
 
 import org.aossie.starcross.control.AstronomerModel;
-import org.aossie.starcross.ephemeris.Planet;
-import org.aossie.starcross.ephemeris.PlanetSource;
+import org.aossie.starcross.source.Planet;
+import org.aossie.starcross.source.PlanetSource;
 import org.aossie.starcross.source.data.AstronomicalSource;
 
 import java.util.ArrayList;

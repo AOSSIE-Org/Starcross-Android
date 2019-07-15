@@ -31,7 +31,6 @@ public class PolyLineObjectManager extends RendererObjectManager {
     }
 
     public void updateObjects(List<LineSource> lines, EnumSet<UpdateType> updateType) {
-        // We only care about updates to positions, ignore any other updates.
         if (!updateType.contains(UpdateType.Reset) &&
                 !updateType.contains(UpdateType.UpdatePositions)) {
             return;
@@ -41,8 +40,6 @@ public class PolyLineObjectManager extends RendererObjectManager {
             numLineSegments += l.getVertices().size() - 1;
         }
 
-        // To render everything in one call, we render everything as a line list
-        // rather than a series of line strips.
         int numVertices = 4 * numLineSegments;
         int numIndices = 6 * numLineSegments;
 
@@ -67,27 +64,15 @@ public class PolyLineObjectManager extends RendererObjectManager {
             if (coords.size() < 2)
                 continue;
 
-            // If the color isn't fully opaque, set opaque to false.
-//            int color =1;
-//            opaque &= (color & 0xff000000) == 0xff000000;
-
-            // Add the vertices.
             for (int i = 0; i < coords.size() - 1; i++) {
                 Vector3 p1 = coords.get(i);
                 Vector3 p2 = coords.get(i + 1);
                 Vector3 u = VectorUtil.difference(p2, p1);
-                // The normal to the quad should face the origin at its midpoint.
                 Vector3 avg = VectorUtil.sum(p1, p2);
                 avg.scale(0.5f);
-                // I'm assuming that the points will already be on a unit sphere.  If this is not the case,
-                // then we should normalize it here.
                 Vector3 v = VectorUtil.normalized(VectorUtil.crossProduct(u, avg));
                 v.scale(sizeFactor * l.getLineWidth());
 
-
-                // Add the vertices
-
-                // Lower left corner
                 vb.addPoint(VectorUtil.difference(p1, v));
                 cb.addColor(1);
                 tb.addTexCoords(0, 1);
