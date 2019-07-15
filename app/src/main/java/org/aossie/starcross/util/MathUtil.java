@@ -45,11 +45,15 @@ public class MathUtil {
         return Math.abs(x);
     }
 
-    static float floor(float x) {
+    public static float floor(float x) {
         return (float) Math.floor(x);
     }
 
     static float ceil(float x) {
         return (float) Math.ceil(x);
+    }
+
+    public static float log10(float x) {
+        return (float) Math.log10(x);
     }
 }

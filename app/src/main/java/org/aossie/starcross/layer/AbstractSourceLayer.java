@@ -5,6 +5,8 @@ import android.content.res.Resources;
 import org.aossie.starcross.renderer.RendererObjectManager;
 import org.aossie.starcross.renderer.util.AbstractUpdateClosure;
 import org.aossie.starcross.source.data.AstronomicalSource;
+import org.aossie.starcross.source.data.ImageSource;
+import org.aossie.starcross.source.data.LineSource;
 import org.aossie.starcross.source.data.PointSource;
 import org.aossie.starcross.source.data.Source;
 
@@ -15,6 +17,8 @@ public abstract class AbstractSourceLayer extends AbstractLayer {
 
     private final ArrayList<PointSource> pointSources = new ArrayList<>();
     private final ArrayList<AstronomicalSource> astroSources = new ArrayList<>();
+    private final ArrayList<LineSource> lineSources = new ArrayList<>();
+    private final ArrayList<ImageSource> imageSources = new ArrayList<ImageSource>();
 
     private final boolean shouldUpdate;
     private SourceUpdateClosure closure;
@@ -31,6 +35,8 @@ public abstract class AbstractSourceLayer extends AbstractLayer {
         for (AstronomicalSource astroSource : astroSources) {
             Source sources = astroSource.initialize();
             pointSources.addAll(sources.getPoints());
+            lineSources.addAll(sources.getLines());
+            imageSources.addAll(sources.getImages());
         }
         updateLayerForControllerChange();
     }
@@ -63,7 +69,7 @@ public abstract class AbstractSourceLayer extends AbstractLayer {
     }
 
     private void redraw(EnumSet<RendererObjectManager.UpdateType> updateTypes) {
-        super.redraw(pointSources, updateTypes);
+        super.redraw(pointSources, lineSources, imageSources, updateTypes);
     }
 
     public static class SourceUpdateClosure extends AbstractUpdateClosure {

@@ -1,18 +1,25 @@
-package org.aossie.starcross.positioning;
+package org.aossie.starcross.util;
 
-import org.aossie.starcross.util.MathUtil;
-import org.aossie.starcross.util.Vector3;
+import org.aossie.starcross.source.OrbitalElements;
+import org.aossie.starcross.source.Planet;
+
+import java.util.Date;
 
 public class HeliocentricCoordinates extends Vector3 {
+    public float radius;  // Radius. (AU)
 
-    private float radius;
-    private static final float OBLIQUITY = 23.439281f * MathUtil.PI / 180.0f;
+    // Value of the obliquity of the ecliptic for J2000
+    private static final float OBLIQUITY = 23.439281f * Geometry.DEGREES_TO_RADIANS;
 
-    private HeliocentricCoordinates(float radius, float xh, float yh, float zh) {
+    public HeliocentricCoordinates(float radius, float xh, float yh, float zh) {
         super(xh, yh, zh);
         this.radius = radius;
     }
 
+    /**
+     * Subtracts the values of the given heliocentric coordinates from this
+     * object.
+     */
     public void Subtract(HeliocentricCoordinates other) {
         this.x -= other.x;
         this.y -= other.y;
@@ -26,17 +33,16 @@ public class HeliocentricCoordinates extends Vector3 {
                 this.y * MathUtil.sin(OBLIQUITY) + this.z * MathUtil.cos(OBLIQUITY));
     }
 
-    public float DistanceFrom(HeliocentricCoordinates other) {
-        float dx = this.x - other.x;
-        float dy = this.y - other.y;
-        float dz = this.z - other.z;
-        return MathUtil.sqrt(dx * dx + dy * dy + dz * dz);
+    public static HeliocentricCoordinates getInstance(Planet planet, Date date) {
+        return getInstance(planet.getOrbitalElements(date));
     }
 
-    static HeliocentricCoordinates getInstance(OrbitalElements elem) {
+    public static HeliocentricCoordinates getInstance(OrbitalElements elem) {
         float anomaly = elem.getAnomaly();
         float ecc = elem.eccentricity;
         float radius = elem.distance * (1 - ecc * ecc) / (1 + ecc * MathUtil.cos(anomaly));
+
+        // heliocentric rectangular coordinates of planet
         float per = elem.perihelion;
         float asc = elem.ascendingNode;
         float inc = elem.inclination;

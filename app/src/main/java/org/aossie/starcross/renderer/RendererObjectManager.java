@@ -7,7 +7,9 @@ import javax.microedition.khronos.opengles.GL10;
 public abstract class RendererObjectManager implements Comparable<RendererObjectManager> {
     public enum UpdateType {
         Reset,
-        UpdatePositions
+        UpdatePositions,
+          // Only update positions of existing objects.
+        UpdateImages
     }
 
     private boolean enabled = true;

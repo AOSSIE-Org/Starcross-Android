@@ -163,6 +163,14 @@ public class SkyRenderer implements GLSurfaceView.Renderer {
         return new PointObjectManager(layer, textureManager);
     }
 
+    public PolyLineObjectManager createPolyLineManager(int layer) {
+        return new PolyLineObjectManager(layer, textureManager);
+    }
+
+    public ImageObjectManager createImageManager(int layer) {
+        return new ImageObjectManager(layer, textureManager);
+    }
+
 }
 
 

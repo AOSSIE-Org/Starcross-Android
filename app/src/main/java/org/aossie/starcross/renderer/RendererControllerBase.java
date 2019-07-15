@@ -2,6 +2,8 @@ package org.aossie.starcross.renderer;
 
 import org.aossie.starcross.renderer.util.UpdateClosure;
 
+import org.aossie.starcross.source.data.ImageSource;
+import org.aossie.starcross.source.data.LineSource;
 import org.aossie.starcross.source.data.PointSource;
 
 import java.util.EnumSet;
@@ -45,6 +47,36 @@ public abstract class RendererControllerBase {
         }
     }
 
+    public static class LineManager extends RenderManager<LineSource> {
+        private LineManager(PolyLineObjectManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public void queueObjects(final List<LineSource> lines,
+                                 final EnumSet<RendererObjectManager.UpdateType> updateType,
+                                 RendererControllerBase controller) {
+            controller.queueRunnable(new Runnable() { public void run() {
+                ((PolyLineObjectManager) manager).updateObjects(lines, updateType);
+            }});
+        }
+    }
+
+    public static class ImageManager extends RenderManager<ImageSource> {
+        private ImageManager(ImageObjectManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public void queueObjects(final List<ImageSource> images,
+                                 final EnumSet<RendererObjectManager.UpdateType> updateType,
+                                 RendererControllerBase controller) {
+            controller.queueRunnable(new Runnable() { public void run() {
+                ((ImageObjectManager) manager).updateObjects(images, updateType);
+            }});
+        }
+    }
+
 
     protected interface EventQueuer {
         void queueEvent(Runnable r);
@@ -58,6 +90,19 @@ public abstract class RendererControllerBase {
 
     public PointManager createPointManager(int layer) {
         PointManager manager = new PointManager(mRenderer.createPointManager(layer));
+        queueAddManager(manager);
+        return manager;
+    }
+
+    public LineManager createLineManager(int layer) {
+        LineManager manager = new LineManager(mRenderer.createPolyLineManager(layer));
+        queueAddManager(manager);
+        return manager;
+    }
+
+
+    public ImageManager createImageManager(int layer) {
+        ImageManager manager = new ImageManager(mRenderer.createImageManager(layer));
         queueAddManager(manager);
         return manager;
     }

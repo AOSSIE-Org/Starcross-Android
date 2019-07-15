@@ -5,6 +5,10 @@ public class GeocentricCoordinates extends Vector3 {
         super(x, y, z);
     }
 
+    public void updateFromRaDec(RaDec raDec) {
+        updateFromRaDec(raDec.ra, raDec.dec);
+    }
+
     private void updateFromRaDec(float ra, float dec) {
         float raRadians = ra * Geometry.DEGREES_TO_RADIANS;
         float decRadians = dec * Geometry.DEGREES_TO_RADIANS;
@@ -18,6 +22,10 @@ public class GeocentricCoordinates extends Vector3 {
         GeocentricCoordinates coords = new GeocentricCoordinates(0.0f, 0.0f, 0.0f);
         coords.updateFromRaDec(ra, dec);
         return coords;
+    }
+
+    public static GeocentricCoordinates getInstance(RaDec raDec) {
+        return getInstance(raDec.ra, raDec.dec);
     }
 
     @Override

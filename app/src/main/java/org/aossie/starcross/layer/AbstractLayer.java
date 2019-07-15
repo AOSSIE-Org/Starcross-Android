@@ -7,6 +7,8 @@ import org.aossie.starcross.renderer.RendererController;
 import org.aossie.starcross.renderer.RendererControllerBase;
 import org.aossie.starcross.renderer.RendererObjectManager;
 import org.aossie.starcross.renderer.util.UpdateClosure;
+import org.aossie.starcross.source.data.ImageSource;
+import org.aossie.starcross.source.data.LineSource;
 import org.aossie.starcross.source.data.PointSource;
 import org.aossie.starcross.util.MiscUtil;
 
@@ -69,7 +71,10 @@ public abstract class AbstractLayer implements Layer {
         }
     }
 
-    void redraw(final ArrayList<PointSource> pointSources, EnumSet<RendererObjectManager.UpdateType> updateTypes) {
+    void redraw(final ArrayList<PointSource> pointSources,
+                final ArrayList<LineSource> lineSources,
+                final ArrayList<ImageSource> imageSources,
+                EnumSet<RendererObjectManager.UpdateType> updateTypes) {
         if (renderer == null) {
             Log.w(TAG, "Renderer not set - aborting: " + this.getClass().getSimpleName());
             return;
@@ -78,16 +83,20 @@ public abstract class AbstractLayer implements Layer {
         renderMapLock.lock();
         try {
             RendererController.AtomicSection atomic = renderer.createAtomic();
-            setSources(pointSources, updateTypes, atomic);
+            setSources(pointSources, updateTypes, PointSource.class, atomic);
+            setSources(lineSources, updateTypes, LineSource.class, atomic);
+            setSources(imageSources, updateTypes, ImageSource.class, atomic);
             renderer.queueAtomic(atomic);
         } finally {
             renderMapLock.unlock();
         }
     }
 
-    private <E> void setSources(ArrayList<E> sources, EnumSet<RendererObjectManager.UpdateType> updateType,
+    private <E> void setSources(ArrayList<E> sources,
+                                EnumSet<RendererObjectManager.UpdateType> updateType,
+                                Class<E> clazz,
                                 RendererController.AtomicSection atomic) {
-        RendererControllerBase.RenderManager<E> manager = (RendererControllerBase.RenderManager<E>) renderMap.get(PointSource.class);
+        RendererControllerBase.RenderManager<E> manager = (RendererControllerBase.RenderManager<E>) renderMap.get(clazz);
         if (sources == null || sources.isEmpty()) {
             if (manager != null) {
                 manager.queueObjects(Collections.<E>emptyList(), updateType, atomic);
@@ -96,8 +105,10 @@ public abstract class AbstractLayer implements Layer {
         }
 
         if (manager == null) {
-            manager = createRenderManager((Class<E>) PointSource.class, atomic);
-            renderMap.put(PointSource.class, manager);
+            manager = createRenderManager(clazz, atomic);
+            if (manager == null) {
+                renderMap.put(clazz, manager);
+            }
         }
         manager.queueObjects(sources, updateType, atomic);
     }
@@ -105,6 +116,11 @@ public abstract class AbstractLayer implements Layer {
     private <E> RendererControllerBase.RenderManager<E> createRenderManager(Class<E> clazz, RendererControllerBase controller) {
         if (clazz.equals(PointSource.class)) {
             return (RendererControllerBase.RenderManager<E>) controller.createPointManager(getLayerDepthOrder());
+        } else if (clazz.equals(LineSource.class)) {
+            return (RendererControllerBase.RenderManager<E>) controller.createLineManager(getLayerDepthOrder());
+
+        } else if (clazz.equals(ImageSource.class)) {
+            return (RendererControllerBase.RenderManager<E>) controller.createImageManager(getLayerDepthOrder());
         }
         throw new IllegalStateException("Unknown source type: " + clazz);
     }
