@@ -3,6 +3,8 @@ package org.aossie.starcross.control;
 import org.aossie.starcross.util.GeocentricCoordinates;
 import org.aossie.starcross.util.Vector3;
 
+import java.util.Date;
+
 public interface AstronomerModel {
 
     class Pointing {
@@ -68,4 +70,6 @@ public interface AstronomerModel {
     Pointing getPointing();
 
     void setPointing(Vector3 lineOfSight, Vector3 perpendicular);
+
+    Date getTime();
 }

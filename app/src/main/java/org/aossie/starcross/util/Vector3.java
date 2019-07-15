@@ -51,6 +51,12 @@ public class Vector3 {
         this.z = this.z / norm;
     }
 
+    public void scale(float scale) {
+        this.x = this.x * scale;
+        this.y = this.y * scale;
+        this.z = this.z * scale;
+    }
+
     @Override
     public boolean equals(Object object) {
         if (!(object instanceof Vector3)) return false;

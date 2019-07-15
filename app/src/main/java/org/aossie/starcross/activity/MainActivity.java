@@ -53,9 +53,8 @@ public class MainActivity extends AppCompatActivity {
 
         LayerManager layerManager = new LayerManager();
         layerManager.addLayer(new StarsLayer(getAssets(), getResources()));
-        // TODO filter works with adding or removing layer From layer manager
-//        layerManager.addLayer(new ConstellationsLayer(getAssets(), getResources())); // TODO add constellations to surfaceview
-//        layerManager.addLayer(new PlanetsLayer(getResources())); // TODO add planets to surfaceview
+        layerManager.addLayer(new ConstellationsLayer(getAssets(), getResources()));
+        layerManager.addLayer(new PlanetsLayer(model, getResources()));
         layerManager.initialize();
         layerManager.registerWithRenderer(rendererController);
 

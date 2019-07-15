@@ -41,6 +41,10 @@ public final class TextureManager {
         return tex;
     }
 
+    public TextureReference createTexture(GL10 gl) {
+        return createTextureInternal(gl);
+    }
+
     public void reset() {
         resourceIdToTextureMap.clear();
         for (TextureReferenceImpl ref : allTextures) {
@@ -57,6 +61,12 @@ public final class TextureManager {
         public void bind(GL10 gl) {
             checkValid();
             gl.glBindTexture(GL10.GL_TEXTURE_2D, mTextureID);
+        }
+
+        public void delete(GL10 gl) {
+            checkValid();
+            gl.glDeleteTextures(1, new int[] {mTextureID}, 0);
+            invalidate();
         }
 
         void invalidate() {

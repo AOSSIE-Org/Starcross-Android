@@ -24,4 +24,8 @@ public class VisionColorBuffer {
     public void addColor() {
         normalBuffer.addColor();
     }
+
+    public void addColor(int i) {
+        normalBuffer.addColor(i, i);
+    }
 }

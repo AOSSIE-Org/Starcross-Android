@@ -1,7 +1,7 @@
 package org.aossie.starcross.util;
 
 public class Geometry {
-    static final float DEGREES_TO_RADIANS = MathUtil.PI / 180.0f;
+    public static final float DEGREES_TO_RADIANS = MathUtil.PI / 180.0f;
     public static final float RADIANS_TO_DEGREES = 180.0f / MathUtil.PI;
 
     private Geometry() {

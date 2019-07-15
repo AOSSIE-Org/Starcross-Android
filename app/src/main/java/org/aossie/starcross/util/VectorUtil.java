@@ -38,4 +38,16 @@ public class VectorUtil {
     private static Vector3 scale(Vector3 v, float factor) {
         return scale(factor, v);
     }
+
+    public static Vector3 difference(Vector3 v1, Vector3 v2) {
+        return sum(v1, negate(v2));
+    }
+
+    public static Vector3 negate(Vector3 v) {
+        return new Vector3(-v.x, -v.y, -v.z);
+    }
+
+    public static Vector3 sum(Vector3 v1, Vector3 v2) {
+        return new Vector3(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
+    }
 }
