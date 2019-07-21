@@ -34,8 +34,10 @@ public class MainActivity extends AppCompatActivity {
     private GestureDetector dragZoomRotateDetector;
 
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
+    public void onCreate(Bundle bundle) {
+        super.onCreate(bundle);
+
+        // todo get intent search provider
 
         controller = new ControllerGroup();
         model = new AstronomerModelImpl();
