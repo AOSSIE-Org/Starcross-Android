@@ -1,12 +1,14 @@
 package org.aossie.starcross.control;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ControllerGroup implements Controller {
 
     private ZoomController zoomController;
     private ManualOrientationController manualDirectionController;
     private final ArrayList<Controller> controllers = new ArrayList<>();
+    private CompositeClock transitioningClock = new CompositeClock(new TimeTravelClock());
 
     public ControllerGroup() {
         zoomController = new ZoomController();
@@ -20,6 +22,7 @@ public class ControllerGroup implements Controller {
         for (Controller controller : controllers) {
             controller.setModel(model);
         }
+        // TODO set clock to model
     }
 
     @Override
@@ -54,5 +57,13 @@ public class ControllerGroup implements Controller {
 
     public void zoomBy(float ratio) {
         zoomController.zoomBy(ratio);
+    }
+
+    public void goTimeTravel(Date d) {
+        transitioningClock.goTimeTravel(d);
+    }
+
+    public void useRealTime() {
+        transitioningClock.returnToRealTime();
     }
 }
