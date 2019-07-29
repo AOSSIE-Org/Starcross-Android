@@ -32,6 +32,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <provider
+            android:name=".search.SearchProvider"
+            android:authorities="org.aossie.starcross"
+            android:exported="false"
+            android:syncable="false"/>
     </application>
 
 </manifest>

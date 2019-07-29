@@ -2,6 +2,7 @@ package org.aossie.starcross.control;
 
 public class ZoomController extends AbstractController {
     private static final float MAX_ZOOM_OUT = 90.0f;
+    private static final float MAX_ZOOM_IN = 10.0f;
 
     private void setFieldOfView(float zoomDegrees) {
         model.setFieldOfView(zoomDegrees);
@@ -18,6 +19,7 @@ public class ZoomController extends AbstractController {
     void zoomBy(float ratio) {
         float zoomDegrees = model.getFieldOfView();
         zoomDegrees = Math.min(zoomDegrees * ratio, MAX_ZOOM_OUT);
+        zoomDegrees = Math.max(zoomDegrees, MAX_ZOOM_IN);
         setFieldOfView(zoomDegrees);
     }
 }
