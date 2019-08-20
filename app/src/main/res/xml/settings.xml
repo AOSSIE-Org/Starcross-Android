@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="auto_mode"
+        android:title="Auto mode" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="disable_gyro"
+        android:title="Dysable Gyro" />
+</PreferenceScreen>
