@@ -155,7 +155,7 @@ public class PointObjectManager extends RendererObjectManager {
 
     @Override
     public void reload(GL10 gl, boolean fullReload) {
-        textureRef = textureManager().getTextureFromResource(gl, R.drawable.stars_texture);
+        textureRef = textureManager().getTextureFromResource(gl, R.drawable.star);
         for (RegionData data : mSkyRegions.getDataForAllRegions()) {
             data.vertexBuffer.reload();
             data.colorBuffer.reload();
