@@ -1,20 +1,40 @@
 package org.aossie.starcross.control;
 
+import android.util.Log;
+
+import org.aossie.starcross.util.GeocentricCoordinates;
+
 import java.util.ArrayList;
 import java.util.Date;
 
 public class ControllerGroup implements Controller {
-
+    private AstronomerModel model;
+    private boolean usingAutoMode = true;
     private ZoomController zoomController;
+    private TeleportingController teleportingController;
     private ManualOrientationController manualDirectionController;
     private final ArrayList<Controller> controllers = new ArrayList<>();
-    private CompositeClock transitioningClock = new CompositeClock(new TimeTravelClock());
+    private SensorOrientationController sensorOrientationController;
+    private TimeTravelClock timeTravelClock = new TimeTravelClock();
+    private CompositeClock transitioningClock = new CompositeClock(timeTravelClock, new RealClock());
 
-    public ControllerGroup() {
-        zoomController = new ZoomController();
+    public ControllerGroup(SensorOrientationController sensorOrientationController) {
+        this.sensorOrientationController = sensorOrientationController;
+        addController(sensorOrientationController);
         manualDirectionController = new ManualOrientationController();
         addController(manualDirectionController);
+        zoomController = new ZoomController();
         addController(zoomController);
+        teleportingController = new TeleportingController();
+        addController(teleportingController);
+        setAutoMode(true);
+    }
+
+    @Override
+    public void setEnabled(boolean enabled) {
+        for (Controller controller : controllers) {
+            controller.setEnabled(enabled);
+        }
     }
 
     @Override
@@ -22,7 +42,18 @@ public class ControllerGroup implements Controller {
         for (Controller controller : controllers) {
             controller.setModel(model);
         }
-        // TODO set clock to model
+        this.model = model;
+        model.setAutoUpdatePointing(usingAutoMode);
+        model.setClock(transitioningClock);
+    }
+
+    public void setAutoMode(boolean enabled) {
+        manualDirectionController.setEnabled(!enabled);
+        sensorOrientationController.setEnabled(enabled);
+        if (model != null) {
+            model.setAutoUpdatePointing(enabled);
+        }
+        usingAutoMode = enabled;
     }
 
     @Override
@@ -63,7 +94,12 @@ public class ControllerGroup implements Controller {
         transitioningClock.goTimeTravel(d);
     }
 
-    public void useRealTime() {
-        transitioningClock.returnToRealTime();
+    public boolean isAutoMode() {
+        return usingAutoMode;
     }
+
+    public void teleport(GeocentricCoordinates target) {
+        teleportingController.teleport(target);
+    }
+
 }
