@@ -8,7 +8,7 @@ import org.aossie.starcross.control.AstronomerModel;
 import org.aossie.starcross.control.ControllerGroup;
 import org.aossie.starcross.util.Geometry;
 
-public class MapMover implements GestureDetector.DragRotateZoomGestureDetectorListener {
+public class MapMover implements MapGestureDetector.DragRotateZoomGestureDetectorListener {
     private AstronomerModel model;
     private ControllerGroup controllerGroup;
     private float sizeTimesRadiansToDegrees;

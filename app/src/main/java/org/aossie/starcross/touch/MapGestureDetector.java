@@ -4,7 +4,7 @@ import android.view.MotionEvent;
 
 import org.aossie.starcross.util.MathUtil;
 
-public class GestureDetector {
+public class MapGestureDetector {
     private enum State {READY, DRAGGING, DRAGGING2}
 
     private float last1X;
@@ -22,7 +22,7 @@ public class GestureDetector {
         void onRotate(float radians);
     }
 
-    public GestureDetector(DragRotateZoomGestureDetectorListener listener) {
+    public MapGestureDetector(DragRotateZoomGestureDetectorListener listener) {
         this.listener = listener;
     }
 
