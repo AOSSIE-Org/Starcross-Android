@@ -1,11 +1,11 @@
 package org.aossie.starcross.source.data;
 
-public interface LabelSource extends PositionSource {
+public interface TextSource extends Colorable, PositionSource {
     String getText();
 
     void setText(String newText);
 
     int getFontSize();
 
-    void setFontSizeText(int newFontSize);
+    public float getOffset();
 }

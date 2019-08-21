@@ -26,4 +26,5 @@ public interface PointSource extends PositionSource {
         }
     }
     int getSize();
+    public Shape getPointShape();
 }
