@@ -50,4 +50,8 @@ public class VectorUtil {
     public static Vector3 sum(Vector3 v1, Vector3 v2) {
         return new Vector3(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
     }
+
+    public static Vector3 projectOntoUnit(Vector3 v, Vector3 onto) {
+        return scale(dotProduct(v, onto), onto);
+    }
 }

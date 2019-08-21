@@ -1,5 +1,7 @@
 package org.aossie.starcross.util;
 
+import java.util.Date;
+
 public class Geometry {
     public static final float DEGREES_TO_RADIANS = MathUtil.PI / 180.0f;
     public static final float RADIANS_TO_DEGREES = 180.0f / MathUtil.PI;
@@ -78,7 +80,27 @@ public class Geometry {
                 * scalarProduct(v2, v2));
     }
 
-    private static float scalarProduct(Vector3 v1, Vector3 v2) {
+    public static float scalarProduct(Vector3 v1, Vector3 v2) {
         return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
     }
+
+    public static Matrix3x3 matrixMultiply(Matrix3x3 m1, Matrix3x3 m2) {
+        return new Matrix3x3(m1.xx*m2.xx + m1.xy*m2.yx + m1.xz*m2.zx,
+                m1.xx*m2.xy + m1.xy*m2.yy + m1.xz*m2.zy,
+                m1.xx*m2.xz + m1.xy*m2.yz + m1.xz*m2.zz,
+                m1.yx*m2.xx + m1.yy*m2.yx + m1.yz*m2.zx,
+                m1.yx*m2.xy + m1.yy*m2.yy + m1.yz*m2.zy,
+                m1.yx*m2.xz + m1.yy*m2.yz + m1.yz*m2.zz,
+                m1.zx*m2.xx + m1.zy*m2.yx + m1.zz*m2.zx,
+                m1.zx*m2.xy + m1.zy*m2.yy + m1.zz*m2.zy,
+                m1.zx*m2.xz + m1.zy*m2.yz + m1.zz*m2.zz);
+    }
+
+    public static RaDec calculateRADecOfZenith(Date utc, LatLong location) {
+        // compute overhead RA in degrees
+        float my_ra = TimeUtil.meanSiderealTime(utc, location.getLongitude());
+        float my_dec = location.getLatitude();
+        return new RaDec(my_ra, my_dec);
+    }
+
 }
