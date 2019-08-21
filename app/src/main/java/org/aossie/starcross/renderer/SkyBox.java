@@ -6,7 +6,10 @@ import org.aossie.starcross.renderer.util.ColorBuffer;
 import org.aossie.starcross.renderer.util.IndexBuffer;
 import org.aossie.starcross.renderer.util.TextureManager;
 import org.aossie.starcross.renderer.util.VertexBuffer;
+import org.aossie.starcross.util.GeocentricCoordinates;
 import org.aossie.starcross.util.MathUtil;
+import org.aossie.starcross.util.Vector3;
+import org.aossie.starcross.util.VectorUtil;
 
 import javax.microedition.khronos.opengles.GL10;
 
@@ -18,6 +21,7 @@ public class SkyBox extends RendererObjectManager {
     private VertexBuffer vertexBuffer = new VertexBuffer(true);
     private ColorBuffer colorBuffer = new ColorBuffer(true);
     private IndexBuffer indexBuffer = new IndexBuffer(true);
+    GeocentricCoordinates mSunPos = new GeocentricCoordinates(0, 1, 0);
 
     SkyBox(int layer, TextureManager textureManager) {
         super(layer, textureManager);
@@ -111,6 +115,11 @@ public class SkyBox extends RendererObjectManager {
         indexBuffer.reload();
     }
 
+    public void setSunPosition(GeocentricCoordinates pos) {
+        mSunPos = pos.copy();
+        //Log.d("SkyBox", "SunPos: " + pos.toString());
+    }
+
     @Override
     protected void drawInternal(GL10 gl) {
         if (getRenderState().getNightVisionMode()) {
@@ -125,6 +134,11 @@ public class SkyBox extends RendererObjectManager {
         gl.glCullFace(GL10.GL_BACK);
         gl.glShadeModel(GL10.GL_SMOOTH);
         gl.glPushMatrix();
+
+        Vector3 cp = VectorUtil.crossProduct(new Vector3(0, 1, 0), mSunPos);
+        cp = VectorUtil.normalized(cp);
+        float angle = 180.0f / MathUtil.PI * MathUtil.acos(mSunPos.y);
+        gl.glRotatef(angle, cp.x, cp.y, cp.z);
 
         vertexBuffer.set(gl);
         colorBuffer.set(gl);

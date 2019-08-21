@@ -14,6 +14,7 @@ public abstract class RendererObjectManager implements Comparable<RendererObject
 
     private boolean enabled = true;
     private RenderStateInterface renderState = null;
+    private UpdateListener mListener = null;
     private int layer;
     private int index;
     private final TextureManager textureManager;
@@ -47,6 +48,19 @@ public abstract class RendererObjectManager implements Comparable<RendererObject
         if (enabled && renderState.getRadiusOfView() <= mMaxRadiusOfView) {
             drawInternal(gl);
         }
+    }
+
+    interface UpdateListener {
+        void queueForReload(RendererObjectManager rom, boolean fullReload);
+    }
+
+    final void setUpdateListener(UpdateListener listener) {
+        this.mListener = listener;
+    }
+
+    // Notifies the renderer that the manager must be reloaded before the next time it is drawn.
+    final void queueForReload(boolean fullReload) {
+        mListener.queueForReload(this, fullReload);
     }
 
     final void setRenderState(RenderStateInterface state) {

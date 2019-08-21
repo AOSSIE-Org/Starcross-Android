@@ -5,6 +5,8 @@ import org.aossie.starcross.renderer.util.UpdateClosure;
 import org.aossie.starcross.source.data.ImageSource;
 import org.aossie.starcross.source.data.LineSource;
 import org.aossie.starcross.source.data.PointSource;
+import org.aossie.starcross.source.data.TextSource;
+import org.aossie.starcross.util.GeocentricCoordinates;
 
 import java.util.EnumSet;
 import java.util.List;
@@ -62,6 +64,21 @@ public abstract class RendererControllerBase {
         }
     }
 
+    public static class LabelManager extends RenderManager<TextSource> {
+        private LabelManager(LabelObjectManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public void queueObjects(final List<TextSource> labels,
+                                 final EnumSet<RendererObjectManager.UpdateType> updateType,
+                                 RendererControllerBase controller) {
+            controller.queueRunnable(new Runnable() { public void run() {
+                ((LabelObjectManager) manager).updateObjects(labels, updateType);
+            }});
+        }
+    }
+
     public static class ImageManager extends RenderManager<ImageSource> {
         private ImageManager(ImageObjectManager manager) {
             super(manager);
@@ -94,6 +111,12 @@ public abstract class RendererControllerBase {
         return manager;
     }
 
+    public LabelManager createLabelManager(int layer) {
+        LabelManager manager = new LabelManager(mRenderer.createLabelManager(layer));
+        queueAddManager(manager);
+        return manager;
+    }
+
     public LineManager createLineManager(int layer) {
         LineManager manager = new LineManager(mRenderer.createPolyLineManager(layer));
         queueAddManager(manager);
@@ -105,6 +128,18 @@ public abstract class RendererControllerBase {
         ImageManager manager = new ImageManager(mRenderer.createImageManager(layer));
         queueAddManager(manager);
         return manager;
+    }
+
+    public void queueNightVisionMode(final boolean enable) {
+        queueRunnable(new Runnable() { public void run() {
+            mRenderer.setNightVisionMode(enable);
+        }});
+    }
+
+    public void queueViewerUpDirection(final GeocentricCoordinates up) {
+        queueRunnable(new Runnable() { public void run() {
+            mRenderer.setViewerUpDirection(up);
+        }});
     }
 
     void queueFieldOfView(final float fov) {
@@ -122,6 +157,19 @@ public abstract class RendererControllerBase {
                 mRenderer.setViewOrientation(dirX, dirY, dirZ, upX, upY, upZ);
             }
         });
+    }
+
+    public void queueEnableSearchOverlay(final GeocentricCoordinates target,
+                                         final String targetName) {
+        queueRunnable( new Runnable() { public void run() {
+            mRenderer.enableSearchOverlay(target, targetName);
+        }});
+    }
+
+    public void queueDisableSearchOverlay() {
+        queueRunnable(new Runnable() { public void run() {
+            mRenderer.disableSearchOverlay();
+        }});
     }
 
     public void addUpdateClosure(final UpdateClosure runnable) {
