@@ -40,7 +40,7 @@ public class Vector3 {
         return MathUtil.sqrt(length2());
     }
 
-    private float length2() {
+    public float length2() {
         return this.x * this.x + this.y * this.y + this.z * this.z;
     }
 

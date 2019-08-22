@@ -32,4 +32,8 @@ public class GeocentricCoordinates extends Vector3 {
     public GeocentricCoordinates copy() {
         return new GeocentricCoordinates(x, y, z);
     }
+
+    public static GeocentricCoordinates getInstanceFromVector3(Vector3 v) {
+        return new GeocentricCoordinates(v.x, v.y, v.z);
+    }
 }

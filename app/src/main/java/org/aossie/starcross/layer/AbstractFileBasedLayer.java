@@ -53,7 +53,7 @@ public abstract class AbstractFileBasedLayer extends AbstractSourceLayer {
             builder.mergeFrom(in);
 
             for (SourceReader.AstronomicalSourceProto proto : builder.build().getSourceList()) {
-                fileSources.add(new ProtobufAstronomicalSource(proto));
+                fileSources.add(new ProtobufAstronomicalSource(proto, getResources()));
             }
             Log.d(TAG, "Found: " + fileSources.size() + " sources");
 

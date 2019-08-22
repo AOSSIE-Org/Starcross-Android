@@ -15,6 +15,9 @@ public class ManualOrientationController extends AbstractController {
     }
 
     void changeRightLeft(float radians) {
+        if (!enabled) {
+            return;
+        }
         AstronomerModel.Pointing pointing = model.getPointing();
         GeocentricCoordinates pointingXyz = pointing.getLineOfSight();
         GeocentricCoordinates topXyz = pointing.getPerpendicular();
@@ -26,6 +29,9 @@ public class ManualOrientationController extends AbstractController {
     }
 
     void changeUpDown(float radians) {
+        if (!enabled) {
+            return;
+        }
         AstronomerModel.Pointing pointing = model.getPointing();
         GeocentricCoordinates pointingXyz = pointing.getLineOfSight();
         GeocentricCoordinates topXyz = pointing.getPerpendicular();
@@ -39,6 +45,9 @@ public class ManualOrientationController extends AbstractController {
     }
 
     void rotate(float degrees) {
+        if (!enabled) {
+            return;
+        }
         AstronomerModel.Pointing pointing = model.getPointing();
         GeocentricCoordinates pointingXyz = pointing.getLineOfSight();
         Matrix3x3 rotation = Geometry.calculateRotationMatrix(degrees, pointingXyz);

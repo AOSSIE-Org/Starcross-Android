@@ -2,7 +2,7 @@ package org.aossie.starcross.renderer;
 
 import org.aossie.starcross.R;
 import org.aossie.starcross.renderer.util.IndexBuffer;
-import org.aossie.starcross.renderer.util.VisionColorBuffer;
+import org.aossie.starcross.renderer.util.NightVisionColorBuffer;
 import org.aossie.starcross.renderer.util.SkyRegionMap;
 import org.aossie.starcross.renderer.util.TexCoordBuffer;
 import org.aossie.starcross.renderer.util.TextureManager;
@@ -27,7 +27,7 @@ public class PointObjectManager extends RendererObjectManager {
         List<PointSource> sources = new ArrayList<>();
 
         private VertexBuffer vertexBuffer = new VertexBuffer(true);
-        private VisionColorBuffer colorBuffer = new VisionColorBuffer(true);
+        private NightVisionColorBuffer colorBuffer = new NightVisionColorBuffer(true);
         private TexCoordBuffer texCoordBuffer = new TexCoordBuffer(true);
         private IndexBuffer indexBuffer = new IndexBuffer(true);
     }
@@ -98,6 +98,7 @@ public class PointObjectManager extends RendererObjectManager {
             float starWidthInTexels = 1.0f / NUM_STARS_IN_TEXTURE;
 
             for (PointSource p : data.sources) {
+                int color = 0xffffff;  // Force alpha to 0xff // todo makhan
                 short bottomLeft = index++;
                 short topLeft = index++;
                 short bottomRight = index++;
@@ -138,16 +139,16 @@ public class PointObjectManager extends RendererObjectManager {
 
                 // Add the vertices
                 data.vertexBuffer.addPoint(bottomLeftPos);
-                data.colorBuffer.addColor();
+                data.colorBuffer.addColor(color, true);
 
                 data.vertexBuffer.addPoint(topLeftPos);
-                data.colorBuffer.addColor();
+                data.colorBuffer.addColor(color, true);
 
                 data.vertexBuffer.addPoint(bottomRightPos);
-                data.colorBuffer.addColor();
+                data.colorBuffer.addColor(color, true);
 
                 data.vertexBuffer.addPoint(topRightPos);
-                data.colorBuffer.addColor();
+                data.colorBuffer.addColor(color, true);
             }
             data.sources = null;
         }
@@ -155,7 +156,7 @@ public class PointObjectManager extends RendererObjectManager {
 
     @Override
     public void reload(GL10 gl, boolean fullReload) {
-        textureRef = textureManager().getTextureFromResource(gl, R.drawable.stars_texture);
+        textureRef = textureManager().getTextureFromResource(gl, R.drawable.star);
         for (RegionData data : mSkyRegions.getDataForAllRegions()) {
             data.vertexBuffer.reload();
             data.colorBuffer.reload();
@@ -191,7 +192,7 @@ public class PointObjectManager extends RendererObjectManager {
             }
 
             data.vertexBuffer.set(gl);
-            data.colorBuffer.set(gl);
+            data.colorBuffer.set(gl, getRenderState().getNightVisionMode());
             data.texCoordBuffer.set(gl);
             data.indexBuffer.draw(gl, GL10.GL_TRIANGLES);
         }

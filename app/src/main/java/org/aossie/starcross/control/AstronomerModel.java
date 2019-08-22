@@ -63,13 +63,25 @@ public interface AstronomerModel {
         }
     }
 
+    void setAutoUpdatePointing(boolean autoUpdatePointing);
+
     float getFieldOfView();
 
     void setFieldOfView(float degrees);
 
     Pointing getPointing();
 
+    void setClock(Clock clock);
+
     void setPointing(Vector3 lineOfSight, Vector3 perpendicular);
 
     Date getTime();
+
+    void setPhoneSensorValues(Vector3 acceleration, Vector3 magneticField);
+
+    void setPhoneSensorValues(float[] rotationVector);
+
+    GeocentricCoordinates getZenith();
+
+    void setMagneticDeclinationCalculator();
 }

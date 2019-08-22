@@ -1,7 +1,5 @@
 package org.aossie.starcross.renderer.util;
 
-import android.util.Log;
-
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.IntBuffer;
@@ -20,8 +18,8 @@ public class ColorBuffer {
         this.useVBO = useVBO;
     }
 
-    void addColor() {
-        addColor(((0xff) << 24) | ((0xff) << 16) | ((0xff) << 8) | (0xff));
+    public int size() {
+        return numVertices;
     }
 
     public void reset(int numVertices) {
@@ -36,9 +34,8 @@ public class ColorBuffer {
         colorBuffer.put(abgr);
     }
 
-    public void addColor(int i, int j) {
-        Log.d("lop", "lop");
-        addColor(((40 & 0xff) << 24) | ((0xff) << 16) | ((0xff) << 8) | (0xff));
+    public void addColor(int a, int r, int g, int b) {
+        addColor(((a & 0xff) << 24) | ((b & 0xff) << 16) | ((g & 0xff) << 8) | (r & 0xff));
     }
 
     public void set(GL10 gl) {

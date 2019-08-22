@@ -6,7 +6,7 @@ import org.aossie.starcross.renderer.util.TexCoordBuffer;
 import org.aossie.starcross.renderer.util.TextureManager;
 import org.aossie.starcross.renderer.util.TextureReference;
 import org.aossie.starcross.renderer.util.VertexBuffer;
-import org.aossie.starcross.renderer.util.VisionColorBuffer;
+import org.aossie.starcross.renderer.util.NightVisionColorBuffer;
 import org.aossie.starcross.source.data.LineSource;
 import org.aossie.starcross.util.GeocentricCoordinates;
 import org.aossie.starcross.util.MathUtil;
@@ -20,7 +20,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 public class PolyLineObjectManager extends RendererObjectManager {
     private VertexBuffer mVertexBuffer = new VertexBuffer(true);
-    private VisionColorBuffer mColorBuffer = new VisionColorBuffer(true);
+    private NightVisionColorBuffer mColorBuffer = new NightVisionColorBuffer(true);
     private TexCoordBuffer mTexCoordBuffer = new TexCoordBuffer(true);
     private IndexBuffer mIndexBuffer = new IndexBuffer(true);
     private TextureReference mTexRef = null;
@@ -45,7 +45,7 @@ public class PolyLineObjectManager extends RendererObjectManager {
 
         VertexBuffer vb = mVertexBuffer;
         vb.reset(4 * numLineSegments);
-        VisionColorBuffer cb = mColorBuffer;
+        NightVisionColorBuffer cb = mColorBuffer;
         cb.reset(4 * numLineSegments);
         TexCoordBuffer tb = mTexCoordBuffer;
         tb.reset(numVertices);
@@ -56,6 +56,7 @@ public class PolyLineObjectManager extends RendererObjectManager {
         float fovyInRadians = 60 * MathUtil.PI / 180.0f;
         float sizeFactor = MathUtil.tan(fovyInRadians * 0.5f) / 480;
 
+
         boolean opaque = false;
 
         short vertexIndex = 0;
@@ -63,6 +64,9 @@ public class PolyLineObjectManager extends RendererObjectManager {
             List<GeocentricCoordinates> coords = l.getVertices();
             if (coords.size() < 2)
                 continue;
+
+            int color = l.getColor();
+            opaque &= (color & 0xff000000) == 0xff000000;
 
             for (int i = 0; i < coords.size() - 1; i++) {
                 Vector3 p1 = coords.get(i);
@@ -74,22 +78,22 @@ public class PolyLineObjectManager extends RendererObjectManager {
                 v.scale(sizeFactor * l.getLineWidth());
 
                 vb.addPoint(VectorUtil.difference(p1, v));
-                cb.addColor(1);
+                cb.addColor(color, true, true);
                 tb.addTexCoords(0, 1);
 
                 // Upper left corner
                 vb.addPoint(VectorUtil.sum(p1, v));
-                cb.addColor(1);
+                cb.addColor(color, true, true);
                 tb.addTexCoords(0, 0);
 
                 // Lower left corner
                 vb.addPoint(VectorUtil.difference(p2, v));
-                cb.addColor(1);
+                cb.addColor(color, true, true);
                 tb.addTexCoords(1, 1);
 
                 // Upper left corner
                 vb.addPoint(VectorUtil.sum(p2, v));
-                cb.addColor(1);
+                cb.addColor(color, true, true);
                 tb.addTexCoords(1, 0);
 
 
@@ -146,7 +150,7 @@ public class PolyLineObjectManager extends RendererObjectManager {
         gl.glTexEnvf(GL10.GL_TEXTURE_ENV, GL10.GL_TEXTURE_ENV_MODE, GL10.GL_MODULATE);
 
         mVertexBuffer.set(gl);
-        mColorBuffer.set(gl);
+        mColorBuffer.set(gl, getRenderState().getNightVisionMode());
         mTexCoordBuffer.set(gl);
 
         mIndexBuffer.draw(gl, GL10.GL_TRIANGLES);

@@ -5,6 +5,9 @@ public class ZoomController extends AbstractController {
     private static final float MAX_ZOOM_IN = 10.0f;
 
     private void setFieldOfView(float zoomDegrees) {
+        if (!enabled) {
+            return;
+        }
         model.setFieldOfView(zoomDegrees);
     }
 

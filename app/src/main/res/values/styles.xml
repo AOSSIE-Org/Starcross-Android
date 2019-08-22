@@ -4,6 +4,22 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:windowBackground">@drawable/splash</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:typeface">serif</item>
+        <item name="android:textColorSecondary">@color/light_blue</item>
+        <item name="android:textColor">@color/light_blue</item>
+    </style>
+
+    <style name="Autocomplete" parent="Widget.AppCompat.Light.AutoCompleteTextView">
+        <item name="android:background">@color/dark_blue</item>
+        <item name="colorControlActivated">@color/light_blue</item>
+    </style>
+
+    <style name="AutocompleteRed" parent="Widget.AppCompat.Light.AutoCompleteTextView">
+        <item name="android:background">@color/dark_blue_alpha</item>
+        <item name="colorControlActivated">@color/red</item>
     </style>
 
 </resources>

@@ -7,16 +7,20 @@ import org.aossie.starcross.renderer.RendererController;
 import org.aossie.starcross.renderer.RendererControllerBase;
 import org.aossie.starcross.renderer.RendererObjectManager;
 import org.aossie.starcross.renderer.util.UpdateClosure;
+import org.aossie.starcross.search.SearchResult;
 import org.aossie.starcross.source.data.ImageSource;
 import org.aossie.starcross.source.data.LineSource;
 import org.aossie.starcross.source.data.PointSource;
+import org.aossie.starcross.source.data.TextSource;
 import org.aossie.starcross.util.MiscUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.concurrent.locks.ReentrantLock;
 
 @SuppressWarnings("unchecked")
@@ -71,7 +75,8 @@ public abstract class AbstractLayer implements Layer {
         }
     }
 
-    void redraw(final ArrayList<PointSource> pointSources,
+    void redraw(final ArrayList<TextSource> textSources,
+            final ArrayList<PointSource> pointSources,
                 final ArrayList<LineSource> lineSources,
                 final ArrayList<ImageSource> imageSources,
                 EnumSet<RendererObjectManager.UpdateType> updateTypes) {
@@ -83,6 +88,7 @@ public abstract class AbstractLayer implements Layer {
         renderMapLock.lock();
         try {
             RendererController.AtomicSection atomic = renderer.createAtomic();
+            setSources(textSources, updateTypes, TextSource.class, atomic);
             setSources(pointSources, updateTypes, PointSource.class, atomic);
             setSources(lineSources, updateTypes, LineSource.class, atomic);
             setSources(imageSources, updateTypes, ImageSource.class, atomic);
@@ -121,7 +127,19 @@ public abstract class AbstractLayer implements Layer {
 
         } else if (clazz.equals(ImageSource.class)) {
             return (RendererControllerBase.RenderManager<E>) controller.createImageManager(getLayerDepthOrder());
+        } else if (clazz.equals(TextSource.class)) {
+            return (RendererControllerBase.RenderManager<E>) controller.createLabelManager(getLayerDepthOrder());
         }
         throw new IllegalStateException("Unknown source type: " + clazz);
+    }
+
+    @Override
+    public List<SearchResult> searchByObjectName(String name) {
+        return Collections.emptyList();
+    }
+
+    @Override
+    public Set<String> getObjectNamesMatchingPrefix(String prefix) {
+        return Collections.emptySet();
     }
 }

@@ -17,6 +17,14 @@ public class TexCoordBuffer {
         this.useVBO = useVBO;
     }
 
+    public TexCoordBuffer(int numVertices) {
+        reset(numVertices);
+    }
+
+    public int size() {
+        return numVertices;
+    }
+
     public void reset(int numVertices) {
         if (numVertices < 0) {
             Log.e("TexCoordBuffer", "reset attempting to set numVertices to " + numVertices);

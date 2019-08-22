@@ -1,17 +1,3 @@
-// Copyright 2008 Google Inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 package org.aossie.starcross.source.impl;
 
 import android.content.res.Resources;
@@ -25,10 +11,6 @@ import org.aossie.starcross.util.GeocentricCoordinates;
 import org.aossie.starcross.util.Vector3;
 import org.aossie.starcross.util.VectorUtil;
 
-/**
- *  A celestial object represented by an image, such as a planet or a
- *  galaxy.
- */
 public class ImageSourceImpl extends AbstractSource implements ImageSource {
 
   static Vector3 up = new Vector3(0.0f, 1.0f, 0.0f);
@@ -73,15 +55,9 @@ public class ImageSourceImpl extends AbstractSource implements ImageSource {
 
   public ImageSourceImpl(GeocentricCoordinates coords, Resources res, int id, Vector3 upVec,
                          float imageScale) {
-    super(coords);
+    super(coords, Color.WHITE);
     this.imageScale = imageScale;
 
-    // TODO(jpowell): We're never freeing this resource, so we leak it every
-    // time we create a new ImageSourceImpl and garbage collect an old one.
-    // We need to make sure it gets freed.
-    // We should also cache this so we don't have to keep reloading these
-    // which is really slow and adds noticeable lag to the application when it
-    // happens.
     this.resources = res;
     setUpVector(upVec);
     setImageId(id);
@@ -125,7 +101,6 @@ public class ImageSourceImpl extends AbstractSource implements ImageSource {
     v.scale(imageScale);
     u.scale(imageScale);
 
-    // TODO(serafini): Can we replace these with a float[]?
     ux = u.x;
     uy = u.y;
     uz = u.z;

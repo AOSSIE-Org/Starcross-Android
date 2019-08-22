@@ -16,6 +16,15 @@ public class VertexBuffer {
         this.useVBO = useVBO;
     }
 
+    public VertexBuffer(int numVertices) {
+        this(numVertices, false);
+    }
+
+    public VertexBuffer(int numVertices, boolean useVBO) {
+        this.useVBO = useVBO;
+        reset(numVertices);
+    }
+
     public int size() {
         return numVertices;
     }

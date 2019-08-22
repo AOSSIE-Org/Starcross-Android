@@ -19,11 +19,11 @@ public class GLBuffer {
         this.bufferType = bufferType;
     }
 
-    static boolean canUseVBO() {
+    public static boolean canUseVBO() {
         return false;
     }
 
-    static void unbind(GL11 gl) {
+    public static void unbind(GL11 gl) {
         if (canUseVBO()) {
             gl.glBindBuffer(GL11.GL_ARRAY_BUFFER, 0);
             gl.glBindBuffer(GL11.GL_ELEMENT_ARRAY_BUFFER, 0);

@@ -2,10 +2,11 @@ package org.aossie.starcross.control;
 
 import java.util.Date;
 
-class CompositeClock {
+class CompositeClock implements Clock {
     private enum Mode {REAL_TIME, TRANSITION, TIME_TRAVEL}
 
     private static final long TRANSITION_TIME_MILLIS = 2500L;
+    private Clock realClock;
     private TimeTravelClock travelClock;
     private Mode mode = Mode.REAL_TIME;
     private long startTime;
@@ -13,12 +14,13 @@ class CompositeClock {
     private long transitionWallTime;
     private Mode transitionTo;
 
-    CompositeClock(TimeTravelClock travelClock) {
+    CompositeClock(TimeTravelClock travelClock, Clock realClock) {
         this.travelClock = travelClock;
+        this.realClock = realClock;
     }
 
     void goTimeTravel(Date targetDate) {
-        startTime = getTimeInMillis();
+        startTime = getTimeInMillisSinceEpoch();
         endTime = targetDate.getTime();
         travelClock.setTimeTravelDate(targetDate);
         mode = Mode.TRANSITION;
@@ -26,15 +28,8 @@ class CompositeClock {
         transitionWallTime = System.currentTimeMillis();
     }
 
-    void returnToRealTime() {
-        startTime = getTimeInMillis();
-        endTime = System.currentTimeMillis() + TRANSITION_TIME_MILLIS;
-        mode = Mode.TRANSITION;
-        transitionTo = Mode.REAL_TIME;
-        transitionWallTime = System.currentTimeMillis();
-    }
-
-    private long getTimeInMillis() {
+    @Override
+    public long getTimeInMillisSinceEpoch() {
         if (mode == Mode.TRANSITION) {
             long elapsedTimeMillis = System.currentTimeMillis() - transitionWallTime;
             if (elapsedTimeMillis > TRANSITION_TIME_MILLIS) {
@@ -50,7 +45,7 @@ class CompositeClock {
             case TIME_TRAVEL:
                 return travelClock.getTimeInMillis();
         }
-        return System.currentTimeMillis();
+        return realClock.getTimeInMillisSinceEpoch();
     }
 
     private static double interpolate(double start, double end, double lambda) {

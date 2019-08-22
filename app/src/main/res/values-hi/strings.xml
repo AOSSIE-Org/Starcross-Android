@@ -1,0 +1,17 @@
+<resources>
+    <string name="sun">रवि</string>
+    <string name="moon">चांद</string>
+    <string name="mercury">पारा</string>
+    <string name="venus">शुक्र</string>
+    <string name="earth">पृथ्वी</string>
+    <string name="mars">मंगल ग्रह</string>
+    <string name="jupiter">बृहस्पति</string>
+    <string name="saturn">शनि ग्रह</string>
+    <string name="uranus">अरुण ग्रह</string>
+    <string name="neptune">नेपच्यून</string>
+    <string name="pluto">प्लूटो</string>
+
+    <string name="set_manual">मैनुअल सेट करें</string>
+    <string name="set_auto">ऑटो सेट करें</string>
+    <string name="time_travel_start_message_alt">समय किसी वस्तु की यात्रा %s...</string>
+</resources>
