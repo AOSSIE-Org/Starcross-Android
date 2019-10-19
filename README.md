@@ -1,3 +1,9 @@
-# Starcross Android
+### Starcross Android
+[Starcross](https://gitlab.com/aossie/starcross-android/) is an astronomical app for Android, in which you can gaze stars, planets and constellations easily according to their actual Geolocation.
 
-Android version of Starcross Application
+****
+### Links
+  
+ - [Video of the app](https://youtu.be/MPmj3MNd3ik)
+ - [Documentation](https://docs.google.com/document/d/1IROgBuI1bhEoxVovJwu9Hl8uBSOFgXQeaBnXsA1ar2M/edit)
+ - [APK file](https://drive.google.com/open?id=1Mwwig8bDDWbgqAkU8-Wh5rwZ52K0zhHZ)
