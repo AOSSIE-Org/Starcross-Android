@@ -136,6 +136,13 @@ public class MainActivity extends PreferenceActivity implements
 
         sensorAccuracyMonitor = new SensorAccuracyMonitor(sensorManager, this, sharedPreferences);
 
+        boolean currentMode = sharedPreferences.getBoolean(Constant.AUTO_MODE_PREF_KEY,false);
+        if(currentMode)
+            setAutoMode(currentMode);
+        else{
+            sharedPreferences.edit().putBoolean(Constant.AUTO_MODE_PREF_KEY, false).apply();
+            setAutoMode(currentMode);
+        }
         layerManager = new LayerManager();
         layerManager.addLayer(new StarsLayer(getAssets(), getResources()));
         layerManager.addLayer(new ConstellationsLayer(getAssets(), getResources()));
@@ -148,8 +155,8 @@ public class MainActivity extends PreferenceActivity implements
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         if (sensorManager != null && sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null
                 && sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null) {
-            sharedPreferences.edit().putBoolean(Constant.AUTO_MODE_PREF_KEY, false).apply();
-            setAutoMode(false);
+//            sharedPreferences.edit().putBoolean(Constant.AUTO_MODE_PREF_KEY, false).apply();
+//            setAutoMode(false);
             return;
         }
     }
