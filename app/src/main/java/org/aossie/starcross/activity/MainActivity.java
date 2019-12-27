@@ -340,11 +340,17 @@ public class MainActivity extends PreferenceActivity implements
 
     private void openMenu() {
         hideSoftKeyboard(this);
+        search_view.setFocusable(false);
+        search_view_red.setFocusable(false);
         menuCont.setVisibility(View.VISIBLE);
     }
 
     private void closeMenu() {
         hideSoftKeyboard(this);
+        search_view.setFocusable(true);
+        search_view.setFocusableInTouchMode(true);
+        search_view_red.setFocusable(true);
+        search_view_red.setFocusableInTouchMode(true);
         menuCont.setVisibility(View.GONE);
     }
 
