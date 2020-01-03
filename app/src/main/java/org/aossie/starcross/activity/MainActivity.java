@@ -340,11 +340,17 @@ public class MainActivity extends PreferenceActivity implements
 
     private void openMenu() {
         hideSoftKeyboard(this);
+        search_view.setFocusable(false);
+        search_view_red.setFocusable(false);
         menuCont.setVisibility(View.VISIBLE);
     }
 
     private void closeMenu() {
         hideSoftKeyboard(this);
+        search_view.setFocusable(true);
+        search_view.setFocusableInTouchMode(true);
+        search_view_red.setFocusable(true);
+        search_view_red.setFocusableInTouchMode(true);
         menuCont.setVisibility(View.GONE);
     }
 
@@ -407,18 +413,17 @@ public class MainActivity extends PreferenceActivity implements
         nightMode = !nightMode;
 
         if (nightMode) {
-            search_view.setText("");
             search_view.setVisibility(View.INVISIBLE);
-
+            search_view_red.setVisibility(View.VISIBLE);
+            search_view_red.setText(search_view.getText());
             menuIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_red));
             searchIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_search_red));
         } else {
-            search_view_red.setText("");
             search_view_red.setVisibility(View.INVISIBLE);
-
-
+            search_view.setVisibility(View.VISIBLE);
             menuIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu));
             searchIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_search));
+            search_view.setText(search_view_red.getText());
         }
 
         sharedPreferences.edit().putString(ActivityLightLevelManager.LIGHT_MODE_KEY,
