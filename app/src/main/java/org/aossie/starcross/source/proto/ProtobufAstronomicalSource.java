@@ -9,7 +9,7 @@ import org.aossie.starcross.source.data.TextSource;
 import org.aossie.starcross.source.impl.LineSourceImpl;
 import org.aossie.starcross.source.impl.PointSourceImpl;
 import org.aossie.starcross.source.impl.TextSourceImpl;
-import org.aossie.starcross.util.DATAGEN;
+import org.aossie.starcross.util.DataGenerator;
 import org.aossie.starcross.util.GeocentricCoordinates;
 
 import java.util.ArrayList;
@@ -49,7 +49,7 @@ public class ProtobufAstronomicalSource extends AbstractAstronomicalSource {
             names = new ArrayList<String>(proto.getNameIdsCount());
             for (int id : proto.getNameIdsList()) {
 
-                names.add(DATAGEN.getLabel(resources, id));
+                names.add(DataGenerator.getLabel(resources, id));
             }
         }
         return names;
@@ -66,7 +66,7 @@ public class ProtobufAstronomicalSource extends AbstractAstronomicalSource {
 //
 //      try {
             points.add(new TextSourceImpl(getCoords(element.getLocation()),
-                    DATAGEN.getLabel(resources, element.getStringIndex()),
+                    DataGenerator.getLabel(resources, element.getStringIndex()),
                     element.getColor(), element.getOffset(), element.getFontSize()));
 //      } catch (Exception e) {
 //        points.add(new TextSourceImpl(getCoords(element.getLocation()),

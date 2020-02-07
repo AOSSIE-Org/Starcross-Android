@@ -15,8 +15,8 @@ import org.aossie.starcross.util.MiscUtil;
 import org.aossie.starcross.util.TypefaceUtil;
 
 
-public class STARCROSS extends Application {
-    private static final String TAG = MiscUtil.getTag(STARCROSS.class);
+public class StarCross extends Application {
+    private static final String TAG = MiscUtil.getTag(StarCross.class);
 
     SharedPreferences preferences;
     SensorManager sensorManager;
