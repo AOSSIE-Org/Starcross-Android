@@ -4,7 +4,7 @@ import android.content.res.Resources;
 
 import org.aossie.starcross.R;
 
-public class DATAGEN {
+public class DataGenerator {
     public static String getLabel(Resources resource, int id) {
         String label;
         switch (id) {
