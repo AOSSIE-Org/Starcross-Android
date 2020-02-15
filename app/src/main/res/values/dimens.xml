@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="size_none">0dp</dimen>
-    <dimen name="margin_medium">16dp</dimen>
-    <dimen name="padding_small">8dp</dimen>
-    <dimen name="margin_large">32dp</dimen>
-    <dimen name="padding_smaller">4dp</dimen>
-    <dimen name="medium_text_size">20sp</dimen>
-    <dimen name="size_unit_one">1dp</dimen>
+    <dimen name="dimen_0dp">0dp</dimen>
+    <dimen name="dimen_16dp">16dp</dimen>
+    <dimen name="dimen_8dp">8dp</dimen>
+    <dimen name="dimen_32dp">32dp</dimen>
+    <dimen name="dimen_4dp">4dp</dimen>
+    <dimen name="size_20sp">20sp</dimen>
+    <dimen name="dimen_1dp">1dp</dimen>
     <item name="divider_height" type="dimen">0.5dp</item>
+    <dimen name="size_18sp">18sp</dimen>
 </resources>
